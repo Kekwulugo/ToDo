@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+ <meta charset="UTF-8">
+ <meta name="viewport" content="width=device-width, initial-scale=1.0">
+ <link rel="stylesheet" href="Assets/style.css">
+ <title>To Do</title>
+</head>
+<body>
+ <div class="wrapper">
+
+ <header>
+  <h1>TO DO</h1>
+ </header>
+
+ <sidebar>
+ <h1>Projects</h1>
+ <button id="project">New Project</button>
+ </sidebar>
+ 
+ <main>
+
+  <form action="">
+   <label for="title">Task Title</label>
+   <input type="text" name="title" id="title">
+
+   <label for="dueDate"> Due Date</label>
+   <input type="date" name="due-date" id="due-date">
+
+   <label for="dueDate"> Priority</label>
+   <select name="priority" id="priority">
+   <option name="low" id="low">Low</option>
+   <option name="medium" id="medium">Medium</option>
+   <option name="high" id="high">High</option>
+   </select>
+
+   <label for="notes"> Notes</label>
+   <textarea name="notes" id="notes" cols="30" rows="10" placeholder="Add notes here"></textarea>
+   
+   <label for="project"> Project</label>
+   <select name="project" id="project">
+    <option name="project-1" id="project-1">Project 1</option>
+    <option name="project-2" id="project-2">Project 2</option>
+    <option name="project-3" id="project-3">Project 3</option>
+   </select>
+
+
+  </form>
+  
+
+  <h1>Add tasks</h1>
+  <button id="task">Add new task to project</button>
+  <div class="task-container">
+   <p>Title</p>
+   <p>Description</p>
+   <p>Due Date</p>
+   <p>Priority</p>
+   <p>Notes</p>
+   <p>Project</p>
+  </div>
+ </main>
+
+ </div>
+ 
+
+
+ <script src="/Assets/script.js"></script>
+</body>
+</html>
