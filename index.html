@@ -20,36 +20,11 @@
  
  <main>
 
-  <form action="">
-   <label for="title">Task Title</label>
-   <input type="text" name="title" id="title">
-
-   <label for="dueDate"> Due Date</label>
-   <input type="date" name="due-date" id="due-date">
-
-   <label for="dueDate"> Priority</label>
-   <select name="priority" id="priority">
-   <option name="low" id="low">Low</option>
-   <option name="medium" id="medium">Medium</option>
-   <option name="high" id="high">High</option>
-   </select>
-
-   <label for="notes"> Notes</label>
-   <textarea name="notes" id="notes" cols="30" rows="10" placeholder="Add notes here"></textarea>
-   
-   <label for="project"> Project</label>
-   <select name="project" id="project">
-    <option name="project-1" id="project-1">Project 1</option>
-    <option name="project-2" id="project-2">Project 2</option>
-    <option name="project-3" id="project-3">Project 3</option>
-   </select>
-
-
-  </form>
+  
   
 
   <h1>Add tasks</h1>
-  <button id="task">Add new task to project</button>
+  <button id="task" class="btn-open">Add new task to project</button>
   <div class="task-container">
    <p>Title</p>
    <p>Description</p>
@@ -59,8 +34,43 @@
    <p>Project</p>
   </div>
  </main>
+ 
+  <section class="modal hidden">
+   <button class="btn-close">X</button>
+   <form action="">
+    <label for="title">Task Title</label>
+    <input type="text" name="title" id="title">
+   
+    <label for="dueDate"> Due Date</label>
+    <input type="date" name="due-date" id="due-date">
+   
+    <label for="dueDate"> Priority</label>
+    <select name="priority" id="priority">
+     <option name="low" id="low">Low</option>
+     <option name="medium" id="medium">Medium</option>
+     <option name="high" id="high">High</option>
+    </select>
+   
+    <label for="notes"> Notes</label>
+    <textarea name="notes" id="notes" cols="30" rows="10" placeholder="Add notes here"></textarea>
+   
+    <label for="project"> Project</label>
+    <select name="project" id="project">
+     <option name="project-1" id="project-1">Project 1</option>
+     <option name="project-2" id="project-2">Project 2</option>
+     <option name="project-3" id="project-3">Project 3</option>
+    </select>
 
- </div>
+    <button type="submit">Save</button>
+   
+   
+   </form>
+
+  </section>
+  <div class="overlay hidden"></div>
+  
+
+
  
 
 
