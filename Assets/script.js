@@ -1,6 +1,44 @@
+
 // Control Modals
+function openModal (event){
+
+ let overlay = document.querySelector(".overlay");
+ console.log(event.target.id);
+ overlay.classList.remove("hidden"); 
+
+ if(event.target.id == "task"){
+  let Form = document.querySelector("#new-task");
+  Form.classList.remove("hidden");
+ } else {
+  let Form = document.querySelector("#new-project");
+  Form.classList.remove("hidden");
+
+ }
+}
 
 
+
+
+function closeModal(event){
+ let overlay = document.querySelector(".overlay");
+ overlay.classList.add("hidden");
+
+ if(event.target.id == "task-close"){
+  let Form = document.querySelector("#new-task");
+  Form.classList.add("hidden");
+ } else {
+  let Form = document.querySelector("#new-project");
+  Form.classList.add("hidden");
+
+ }
+
+}
+
+let formbtns = document.querySelectorAll(".btn-open");
+formbtns.forEach(e => e.addEventListener("click",openModal));
+
+let formCloseBtns = document.querySelectorAll(".btn-close");
+formCloseBtns.forEach(e=>e.addEventListener('click',closeModal));
 
 //create project Library 
 let myTasks = [];

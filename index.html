@@ -15,7 +15,7 @@
 
  <sidebar>
  <h1>Projects</h1>
- <button id="project-btn">New Project</button>
+ <button id="project-btn" class="btn-open">New Project</button>
  <div class="project-container">
   <div class="project-item">
    <p>Project Title</p>
@@ -51,8 +51,8 @@
   </div>
  </main>
  
-  <section class="modal" id="new-task">
-   <button id="task-close">X</button>
+  <section class="modal hidden" id="new-task">
+   <button id="task-close" class="btn-close">X</button>
    <form action="">
     <label for="title">Task Title</label>
     <input type="text" name="title" id="title">
@@ -83,8 +83,8 @@
    </form>
   </section>
 
-  <section class="modal" id="new-project">
-   <button class="project-close">X</button>
+  <section class="modal hidden" id="new-project">
+   <button id="project-close" class="btn-close">X</button>
 
    <form action="">
     <label for="project-title">Project Title</label>
