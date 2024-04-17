@@ -1,3 +1,6 @@
+let myTasks = [];
+let myProjects = [];
+let currentId = 0;
 
 // Control Modals
 function openModal (event){
@@ -28,15 +31,6 @@ function closeModal(event){
 
 }
 
-let formbtns = document.querySelectorAll(".btn-open");
-formbtns.forEach(e => e.addEventListener("click",openModal));
-
-let formCloseBtns = document.querySelectorAll(".btn-close");
-formCloseBtns.forEach(e=>e.addEventListener('click',closeModal));
-
-//create project Library 
-let myTasks = [];
-
 class Tasks{
  constructor(title,dueDate, priority,notes, project){
   this.title = title;
@@ -48,9 +42,15 @@ class Tasks{
  }
 };
 
-let taskSubmit = document.querySelector(".task-submit");
+class Projects{
+ constructor (index, projectTitle, tasks){
+  this.id = index;
+  this.projectTitle = projectTitle;
+  this.tasks = tasks;
+ }
+};
 
-taskSubmit.addEventListener('click', function(event){
+ function taskSubmit (event){
  event.preventDefault();
 
  //get input details
@@ -70,12 +70,7 @@ console.log(myTasks);
 
 renderTasks();
 closeModal();
-
-
- 
-});
-
-
+};
 
 function renderTasks(){
  let taskContainer = document.querySelector(".task-container");
@@ -130,20 +125,7 @@ function renderProjects(){
 }
 }
 
-let myProjects = [];
-
-class Projects{
- constructor (index, projectTitle, tasks){
-  this.id = index;
-  this.projectTitle = projectTitle;
-  this.tasks = tasks;
- }
-};
-
-let projectSumbit = document.querySelector(".project-submit")
-let currentId = 0;
-
-projectSumbit.addEventListener('click', function(event){
+function projectSumbit (event){
  event.preventDefault();
 
  let Title = document.querySelector("#project-title").value;
@@ -158,7 +140,23 @@ projectSumbit.addEventListener('click', function(event){
 
  console.log(myProjects);
  
-});
+};
+
+(function documentLoad (){
+let formbtns = document.querySelectorAll(".btn-open");
+formbtns.forEach(e => e.addEventListener("click",openModal));
+
+let formCloseBtns = document.querySelectorAll(".btn-close");
+formCloseBtns.forEach(e=>e.addEventListener('click',closeModal));
+
+let taskSubmitBtn = document.querySelector(".task-submit");
+taskSubmitBtn.addEventListener ('click', taskSubmit);
+
+let projectSumbitBtn = document.querySelector(".project-submit");
+projectSumbitBtn.addEventListener ('click', projectSumbit);
+
+})();
+ 
 
 
 
