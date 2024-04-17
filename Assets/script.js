@@ -6,7 +6,7 @@ function openModal (event){
  console.log(event.target.id);
  overlay.classList.remove("hidden"); 
 
- if(event.target.id == "task"){
+ if(event.target.id == "task" ){
   let Form = document.querySelector("#new-task");
   Form.classList.remove("hidden");
  } else {
@@ -16,21 +16,15 @@ function openModal (event){
  }
 }
 
-
-
-
 function closeModal(event){
  let overlay = document.querySelector(".overlay");
  overlay.classList.add("hidden");
 
- if(event.target.id == "task-close"){
-  let Form = document.querySelector("#new-task");
-  Form.classList.add("hidden");
- } else {
-  let Form = document.querySelector("#new-project");
-  Form.classList.add("hidden");
+ let taskForm =  document.querySelector("#new-task");
+ let projectForm = document.querySelector("#new-project");
+ taskForm.classList.add("hidden");
+ projectForm.classList.add("hidden");
 
- }
 
 }
 
@@ -75,9 +69,9 @@ myTasks.push(newTask);
 console.log(myTasks);
 
 renderTasks();
+closeModal();
 
-taskModal.classList.add('hidden');
-overlay.classList.add('hidden');
+
  
 });
 
@@ -160,6 +154,7 @@ projectSumbit.addEventListener('click', function(event){
  myProjects.push(newProject);
 
  renderProjects();
+ closeModal();
 
  console.log(myProjects);
  
