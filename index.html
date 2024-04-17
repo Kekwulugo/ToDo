@@ -15,7 +15,13 @@
 
  <sidebar>
  <h1>Projects</h1>
- <button>New Project</button>
+ <button id="project-btn">New Project</button>
+ <div class="project-container">
+  <div class="project-item">
+   <p>Project Title</p>
+   <p>Project Title</p>
+  </div>
+ </div>
  </sidebar>
  
  <main>
@@ -26,17 +32,27 @@
   <h1>Add tasks</h1>
   <button id="task" class="btn-open">Add new task to project</button>
   <div class="task-container">
+   <div class="task-item">
    <p>Title</p>
    <p>Description</p>
    <p>Due Date</p>
    <p>Priority</p>
    <p>Notes</p>
    <p>Project</p>
+   </div>
+   <div class="task-item">
+    <p>Title</p>
+    <p>Description</p>
+    <p>Due Date</p>
+    <p>Priority</p>
+    <p>Notes</p>
+    <p>Project</p>
+   </div>
   </div>
  </main>
  
-  <section class="modal hidden">
-   <button class="btn-close">X</button>
+  <section class="modal" id="new-task">
+   <button id="task-close">X</button>
    <form action="">
     <label for="title">Task Title</label>
     <input type="text" name="title" id="title">
@@ -61,11 +77,21 @@
      <option name="project-3" id="project-3" value="project-3">Project 3</option>
     </select>
 
-    <button type="submit" class="btn-submit">Save</button>
+    <button type="submit" class="task-submit">Save</button>
    
    
    </form>
+  </section>
 
+  <section class="modal" id="new-project">
+   <button class="project-close">X</button>
+
+   <form action="">
+    <label for="project-title">Project Title</label>
+    <input type="text" name="project-title" id="project-title">
+    <button type="submit" class="project-submit">Save</button>  
+   </form>
+  
   </section>
   <div class="overlay hidden"></div>
   

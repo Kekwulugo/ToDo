@@ -14,11 +14,17 @@ header{
 
 .task-container{
  display: flex;
+ flex-direction: column;
  justify-content: space-between;
 }
 
 .task-container>p{
  margin: 10px;
+}
+
+.task-item{
+ display: flex;
+ justify-content: space-between;
 }
 
 form{
