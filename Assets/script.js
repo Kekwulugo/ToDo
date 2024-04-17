@@ -38,11 +38,15 @@ taskSubmit.addEventListener('click', function(event){
  //get input details
  let taskTitle = document.querySelector("#title").value;
  let taskDueDate = document.querySelector("#due-date").value;
- let taskPriority = document.querySelector("#priority").options.selectedIndex;
+ let taskPriority = document.querySelector("#priority").value;
+ console.log(taskPriority);
  let taskNotes = document.querySelector("#notes").value;
- //let taskProject = document.querySelector("#project").options.selectedIndex;
+ let taskProject = document.querySelector("#project").value;
 
-let newTask = new Tasks(taskTitle,taskDueDate,"",taskNotes,"");
+ console.log(taskProject);
+
+let newTask = new Tasks(taskTitle,taskDueDate,taskPriority,taskNotes,taskProject);
+
 console.log(newTask);
 
 myTasks.push(newTask);
