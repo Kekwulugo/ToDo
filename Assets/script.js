@@ -1,8 +1,11 @@
 let myTasks = [];
-let myProjects = [];
+let myProjects = [{
+ id: 0,
+ projectTitle: "Default Project",
+ tasks: myTasks
+}];
 let currentId = 0;
 
-// Control Modals
 function openModal (event){
 
  let overlay = document.querySelector(".overlay");
@@ -50,7 +53,7 @@ class Projects{
  }
 };
 
- function taskSubmit (event){
+function taskSubmit (event){
  event.preventDefault();
 
  //get input details
@@ -154,6 +157,9 @@ taskSubmitBtn.addEventListener ('click', taskSubmit);
 
 let projectSumbitBtn = document.querySelector(".project-submit");
 projectSumbitBtn.addEventListener ('click', projectSumbit);
+
+renderProjects();
+renderTasks();
 
 })();
  
