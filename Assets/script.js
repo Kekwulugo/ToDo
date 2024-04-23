@@ -1,10 +1,13 @@
 let myTasks = [];
+
 let myProjects = [{
  id: 0,
  projectTitle: "Default Project",
- tasks: myTasks
+ tasks: []
 }];
+
 let currentId = 0;
+let currentTaskId = 0;
 
 function openModal (event){
 
@@ -35,7 +38,8 @@ function closeModal(event){
 }
 
 class Tasks{
- constructor(title,dueDate, priority,notes, project){
+ constructor(id,title,dueDate, priority,notes, project){
+  this.id = id;
   this.title = title;
   this.dueDate = dueDate;
   this.priority = priority;
@@ -60,16 +64,19 @@ function taskSubmit (event){
  let taskTitle = document.querySelector("#title").value;
  let taskDueDate = document.querySelector("#due-date").value;
  let taskPriority = document.querySelector("#priority").value;
- console.log(taskPriority);
  let taskNotes = document.querySelector("#notes").value;
- let taskProject = document.querySelector("#project").value;
+ let taskProject = document.querySelector("#project").selectedIndex;
 
- console.log(taskProject);
 
-let newTask = new Tasks(taskTitle,taskDueDate,taskPriority,taskNotes,taskProject);
+let newTask = new Tasks(currentTaskId,taskTitle,taskDueDate,taskPriority,taskNotes,taskProject);
 
-myTasks.push(newTask);
-console.log(myTasks);
+currentTaskId++;
+
+console.log(taskProject);
+
+myProjects[taskProject].tasks.push(newTask);
+console.log(myProjects);
+
 
 renderTasks();
 closeModal();
@@ -80,8 +87,8 @@ function renderTasks(){
 
  taskContainer.innerHTML = "";
 
- for (let i = 0; i <myTasks.length; i++){
-
+ for (let i = 0; i <myProjects.length; i++){
+ 
   const taskItem = document.createElement("div");
   taskItem.classList.add("task-item");
 
@@ -112,19 +119,32 @@ function renderTasks(){
  }
 };
 
+
 function renderProjects(){
  let projectContainer = document.querySelector(".project-container");
  projectContainer.innerHTML ="";
 
  for (let i = 0; i<myProjects.length;i++){
 
- let projectItem = document.createElement('div');
+ let projectItem = document.createElement('button');
  projectItem.classList.add("project-item");
- let itemTitle = document.createElement('p');
- itemTitle.innerText = myProjects[i].projectTitle;
+ projectItem.innerText = myProjects[i].projectTitle;
+ projectItem.setAttribute('id', myProjects[i].id);
 
- projectItem.append(itemTitle);
+ projectItem.addEventListener('click',renderTasks);
+
  projectContainer.append(projectItem);
+}
+}
+
+function updateProjectOptions (){
+ let projectFormOptions = document.querySelector("#project");
+projectFormOptions.innerHTML = "";
+
+for (let i = 0; i<myProjects.length;i++){
+ let options = document.createElement("option");
+ options.innerText = myProjects[i].projectTitle;
+ projectFormOptions.append(options);
 }
 }
 
@@ -135,10 +155,11 @@ function projectSumbit (event){
 
  currentId++;
 
- let newProject = new Projects(currentId,Title,myTasks);
+ let newProject = new Projects(currentId,Title);
  myProjects.push(newProject);
 
  renderProjects();
+ updateProjectOptions();
  closeModal();
 
  console.log(myProjects);
