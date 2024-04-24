@@ -1,13 +1,11 @@
-let myTasks = [];
-
 let myProjects = [{
  id: 0,
  projectTitle: "Default Project",
- tasks: []
+ tasks: [{id:0,title: "Dummy Task", dueDate: "2024-04-24",priority:"low", notes: "Test notes", project:0}]
 }];
 
 let currentId = 0;
-let currentTaskId = 0;
+let currentTaskId = 1;
 
 function openModal (event){
 
@@ -50,12 +48,26 @@ class Tasks{
 };
 
 class Projects{
- constructor (index, projectTitle, tasks){
+ constructor (index, projectTitle){
   this.id = index;
   this.projectTitle = projectTitle;
-  this.tasks = tasks;
+  this.tasks = [];
  }
 };
+
+function deleteTask (event){
+ 
+ console.log(event.target.dataset.projectId);
+ console.log(event.target.dataset.taskId);
+ myProjects[event.target.dataset.projectId].tasks.pop([event.target.dataset.taskId]);
+ renderTasks();
+
+}
+
+function editTask (event){
+ console.log(event.target.id);
+
+}
 
 function taskSubmit (event){
  event.preventDefault();
@@ -88,35 +100,47 @@ function renderTasks(){
  taskContainer.innerHTML = "";
 
  for (let i = 0; i <myProjects.length; i++){
+  for (let j = 0; j <myProjects[i].tasks.length; j++){
  
   const taskItem = document.createElement("div");
   taskItem.classList.add("task-item");
 
  const title = document.createElement("p");
- title.innerText = myTasks[i].title;
+ title.innerText = myProjects[i].tasks[j].title;
 
  const dueDate = document.createElement("p");
- dueDate.innerText = myTasks[i].dueDate;
+ dueDate.innerText = myProjects[i].tasks[j].dueDate;
 
 
  const priority =document.createElement("p");
- priority.innerText = myTasks[i].priority;
+ priority.innerText = myProjects[i].tasks[j].priority;
 
- const notes = document.createElement("p");
- notes.innerText = myTasks[i].notes;
+ const editBtn = document.createElement("button");
+ editBtn.setAttribute('id',"edit");
+ editBtn.dataset.projectId = myProjects[i].tasks[j].project;
+ editBtn.dataset.taskId = myProjects[i].tasks[j].id;
+ editBtn.innerText = "Edit";
+ editBtn.addEventListener('click',editTask)
 
- const project = document.createElement("p");
- project.innerText = myTasks[i].project;
+ const deleteBtn = document.createElement("button");
+ deleteBtn.setAttribute('id',"delete");
+ deleteBtn.dataset.projectId = myProjects[i].tasks[j].project;
+ deleteBtn.dataset.taskId = myProjects[i].tasks[j].id;
+ deleteBtn.innerText = "Delete";
+ deleteBtn.addEventListener('click', deleteTask);
+
 
  taskItem.append(title);
  taskItem.append(dueDate);
  taskItem.append(priority);
- taskItem.append(notes);
- taskItem.append(project);
+ taskItem.append(editBtn);
+ taskItem.append(deleteBtn);
+
 
  taskContainer.append(taskItem);
 
  }
+}
 };
 
 
@@ -163,6 +187,7 @@ function projectSumbit (event){
  closeModal();
 
  console.log(myProjects);
+
  
 };
 

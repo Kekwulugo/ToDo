@@ -3,6 +3,10 @@
  border: 1px solid black;
 }
 
+span{
+ color: red;
+}
+
 .wrapper{
  display: grid;
  grid-template-columns: repeat(1, 1fr) repeat(1, 2fr);
@@ -22,6 +26,7 @@ button{
  background-color: #0e7490 ;
  padding: 20px;
  border-radius: 9999px;
+ font-size: large;
 }
 
 .project-container{
@@ -35,13 +40,26 @@ button{
  justify-content: space-between;
 }
 
-.task-container>p{
- margin: 10px;
-}
 
 .task-item{
  display: flex;
- justify-content: space-between;
+ gap: 20px;
+ 
+}
+
+.task-item > p {
+ margin: 10px;
+ font-size: large;
+}
+
+#edit{
+ background-color: green;
+
+}
+
+#delete{
+ background-color: red;
+
 }
 
 section{

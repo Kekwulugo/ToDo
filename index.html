@@ -27,23 +27,7 @@
  <main>
   <h1>Add tasks</h1>
   <button id="task" class="btn-open">Add new task to project</button>
-  <div class="task-container">
-   <div class="task-item">
-   <p>Title</p>
-   <p>Description</p>
-   <p>Due Date</p>
-   <p>Priority</p>
-   <p>Notes</p>
-   <p>Project</p>
-   </div>
-   <div class="task-item">
-    <p>Title</p>
-    <p>Description</p>
-    <p>Due Date</p>
-    <p>Priority</p>
-    <p>Notes</p>
-    <p>Project</p>
-   </div>
+  <div class="task-container">   
   </div>
  </main>
  
@@ -82,8 +66,8 @@
    <button id="project-close" class="btn-close">X</button>
 
    <form action="">
-    <label for="project-title">Project Title</label>
-    <input type="text" name="project-title" id="project-title">
+    <label for="project-title">Project Title <span> *</span></label>
+    <input type="text" name="project-title" id="project-title" required>
     <button type="submit" class="project-submit">Save</button>  
    </form>
   
