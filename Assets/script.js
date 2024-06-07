@@ -1,7 +1,7 @@
 let myProjects = [{
  id: 0,
  projectTitle: "Default Project",
- tasks: [{id:0,title: "Dummy Task", dueDate: "2024-04-24",priority:"low", notes: "Test notes", project:0}]
+ tasks: [{id:0,title: "Dummy Task", dueDate: "2024-04-24",priority:"low", notes: "Test notes", project:0, status: "done"}]
 }];
 
 let currentId = 0;
@@ -13,7 +13,7 @@ function openModal (event){
  console.log(event.target.id);
  overlay.classList.remove("hidden"); 
 
- if(event.target.id == "task" ){
+ if(event.target.id == "task" || event.target.id == "edit" ){
   let Form = document.querySelector("#new-task");
   Form.classList.remove("hidden");
  } else {
@@ -36,13 +36,14 @@ function closeModal(event){
 }
 
 class Tasks{
- constructor(id,title,dueDate, priority,notes, project){
+ constructor(id,title,dueDate, priority,notes, project, status){
   this.id = id;
   this.title = title;
   this.dueDate = dueDate;
   this.priority = priority;
   this.notes = notes;
   this.project = project;
+  this.status = status;
 
  }
 };
@@ -66,6 +67,7 @@ function deleteTask (event){
 
 function editTask (event){
  console.log(event.target.id);
+ openModal(event);
 
 }
 
@@ -78,9 +80,10 @@ function taskSubmit (event){
  let taskPriority = document.querySelector("#priority").value;
  let taskNotes = document.querySelector("#notes").value;
  let taskProject = document.querySelector("#project").selectedIndex;
+ let taskStatus = document.querySelector("#status").value;
 
 
-let newTask = new Tasks(currentTaskId,taskTitle,taskDueDate,taskPriority,taskNotes,taskProject);
+let newTask = new Tasks(currentTaskId,taskTitle,taskDueDate,taskPriority,taskNotes,taskProject, taskStatus);
 
 currentTaskId++;
 
@@ -115,11 +118,15 @@ function renderTasks(){
  const priority =document.createElement("p");
  priority.innerText = myProjects[i].tasks[j].priority;
 
+ const status =document.createElement("p");
+ status.innerText = myProjects[i].tasks[j].status;
+
+
  const editBtn = document.createElement("button");
  editBtn.setAttribute('id',"edit");
  editBtn.dataset.projectId = myProjects[i].tasks[j].project;
  editBtn.dataset.taskId = myProjects[i].tasks[j].id;
- editBtn.innerText = "Edit";
+ editBtn.innerText = "View/Edit";
  editBtn.addEventListener('click',editTask)
 
  const deleteBtn = document.createElement("button");
@@ -133,6 +140,7 @@ function renderTasks(){
  taskItem.append(title);
  taskItem.append(dueDate);
  taskItem.append(priority);
+ taskItem.append(status);
  taskItem.append(editBtn);
  taskItem.append(deleteBtn);
 

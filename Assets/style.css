@@ -1,6 +1,5 @@
 * {
  margin: 0;
- border: 1px solid black;
 }
 
 span{
@@ -9,7 +8,7 @@ span{
 
 .wrapper{
  display: grid;
- grid-template-columns: repeat(1, 1fr) repeat(1, 2fr);
+ grid-template-columns: repeat(1, 0.5fr) repeat(1, 2fr);
 }
 
 header{
@@ -21,13 +20,18 @@ header{
 
 }
 
-button{
+sidebar{
+ background-color: grey;
+
+}
+
+/*button{
  color: white;
  background-color: #0e7490 ;
  padding: 20px;
  border-radius: 9999px;
  font-size: large;
-}
+}*/
 
 .project-container{
  display: flex;
