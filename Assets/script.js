@@ -10,7 +10,6 @@ let currentTaskId = 1;
 function openModal (event){
 
  let overlay = document.querySelector(".overlay");
- console.log(event.target.id);
  overlay.classList.remove("hidden"); 
 
  if(event.target.id == "task" || event.target.id == "edit" ){
@@ -58,21 +57,19 @@ class Projects{
 
 function deleteTask (event){
  
- console.log(event.target.dataset.projectId);
- console.log(event.target.dataset.taskId);
  myProjects[event.target.dataset.projectId].tasks.pop([event.target.dataset.taskId]);
  renderTasks(event.target.dataset.projectId);
 
 }
 
 function editTask (event){
- console.log(event.target.id);
  openModal(event);
 
 }
 
 function taskSubmit (event){
  event.preventDefault();
+
 
  //get input details
  let taskTitle = document.querySelector("#title").value;
@@ -87,10 +84,7 @@ let newTask = new Tasks(currentTaskId,taskTitle,taskDueDate,taskPriority,taskNot
 
 currentTaskId++;
 
-console.log(taskProject);
-
 myProjects[taskProject].tasks.push(newTask);
-console.log(myProjects);
 
 
 renderTasks(taskProject);
@@ -98,7 +92,6 @@ closeModal();
 };
 
 function renderTasks(projectNumber){
- console.log(projectNumber)
 
  let taskContainer = document.querySelector(".task-container");
 
@@ -164,7 +157,8 @@ function renderProjects(){
  projectItem.classList.add("project-item");
  projectItem.innerText = myProjects[i].projectTitle;
  projectItem.setAttribute('id', myProjects[i].id);
- projectItem.addEventListener('click',renderTasks(0));
+
+ projectItem.addEventListener('click',renderTasks(myProjects[i].id));
 
  projectContainer.append(projectItem);
 }
@@ -194,8 +188,6 @@ function projectSumbit (event){
  renderProjects();
  updateProjectOptions();
  closeModal();
-
- console.log(myProjects);
 
  
 };
