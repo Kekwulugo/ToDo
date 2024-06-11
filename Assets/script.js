@@ -158,8 +158,11 @@ function renderProjects(){
  projectItem.innerText = myProjects[i].projectTitle;
  projectItem.setAttribute('id', myProjects[i].id);
 
- projectItem.addEventListener('click',renderTasks(myProjects[i].id));
+ projectItem.addEventListener('click', function(){
+  renderTasks(myProjects[i].id)
+ });
 
+ 
  projectContainer.append(projectItem);
 }
 }
@@ -186,6 +189,7 @@ function projectSumbit (event){
  myProjects.push(newProject);
 
  renderProjects();
+ renderTasks(currentId);
  updateProjectOptions();
  closeModal();
 
