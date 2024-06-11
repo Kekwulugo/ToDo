@@ -61,7 +61,7 @@ function deleteTask (event){
  console.log(event.target.dataset.projectId);
  console.log(event.target.dataset.taskId);
  myProjects[event.target.dataset.projectId].tasks.pop([event.target.dataset.taskId]);
- renderTasks();
+ renderTasks(event.target.dataset.projectId);
 
 }
 
@@ -93,46 +93,48 @@ myProjects[taskProject].tasks.push(newTask);
 console.log(myProjects);
 
 
-renderTasks();
+renderTasks(taskProject);
 closeModal();
 };
 
-function renderTasks(){
+function renderTasks(projectNumber){
+ console.log(projectNumber)
+
  let taskContainer = document.querySelector(".task-container");
 
  taskContainer.innerHTML = "";
 
- for (let i = 0; i <myProjects.length; i++){
-  for (let j = 0; j <myProjects[i].tasks.length; j++){
+ 
+  for (let i = 0; i <myProjects[projectNumber].tasks.length; i++){
  
   const taskItem = document.createElement("div");
   taskItem.classList.add("task-item");
 
  const title = document.createElement("p");
- title.innerText = myProjects[i].tasks[j].title;
+ title.innerText = myProjects[projectNumber].tasks[i].title;
 
  const dueDate = document.createElement("p");
- dueDate.innerText = myProjects[i].tasks[j].dueDate;
+ dueDate.innerText = myProjects[projectNumber].tasks[i].dueDate;
 
 
  const priority =document.createElement("p");
- priority.innerText = myProjects[i].tasks[j].priority;
+ priority.innerText = myProjects[projectNumber].tasks[i].priority;
 
  const status =document.createElement("p");
- status.innerText = myProjects[i].tasks[j].status;
+ status.innerText = myProjects[projectNumber].tasks[i].status;
 
 
  const editBtn = document.createElement("button");
  editBtn.setAttribute('id',"edit");
- editBtn.dataset.projectId = myProjects[i].tasks[j].project;
- editBtn.dataset.taskId = myProjects[i].tasks[j].id;
+ editBtn.dataset.projectId = myProjects[projectNumber].tasks[i].project;
+ editBtn.dataset.taskId = myProjects[projectNumber].tasks[i].id;
  editBtn.innerText = "View/Edit";
  editBtn.addEventListener('click',editTask)
 
  const deleteBtn = document.createElement("button");
  deleteBtn.setAttribute('id',"delete");
- deleteBtn.dataset.projectId = myProjects[i].tasks[j].project;
- deleteBtn.dataset.taskId = myProjects[i].tasks[j].id;
+ deleteBtn.dataset.projectId = myProjects[projectNumber].tasks[i].project;
+ deleteBtn.dataset.taskId = myProjects[projectNumber].tasks[i].id;
  deleteBtn.innerText = "Delete";
  deleteBtn.addEventListener('click', deleteTask);
 
@@ -147,8 +149,8 @@ function renderTasks(){
 
  taskContainer.append(taskItem);
 
+  
  }
-}
 };
 
 
@@ -162,8 +164,7 @@ function renderProjects(){
  projectItem.classList.add("project-item");
  projectItem.innerText = myProjects[i].projectTitle;
  projectItem.setAttribute('id', myProjects[i].id);
-
- projectItem.addEventListener('click',renderTasks);
+ projectItem.addEventListener('click',renderTasks(0));
 
  projectContainer.append(projectItem);
 }
@@ -213,7 +214,7 @@ let projectSumbitBtn = document.querySelector(".project-submit");
 projectSumbitBtn.addEventListener ('click', projectSumbit);
 
 renderProjects();
-renderTasks();
+renderTasks(0);
 
 })();
  

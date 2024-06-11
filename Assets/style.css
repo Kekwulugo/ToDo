@@ -9,6 +9,7 @@ span{
 .wrapper{
  display: grid;
  grid-template-columns: repeat(1, 0.5fr) repeat(1, 2fr);
+ 
 }
 
 header{
@@ -16,12 +17,23 @@ header{
  background-color: #0e7490;
  color: white;
  padding: 20px;
- box-shadow:  rgba(255, 255, 255, 0.1) 0px 1px 1px 0px inset, rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px;;
+ box-shadow:  rgba(255, 255, 255, 0.1) 0px 1px 1px 0px inset, rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px;
 
 }
 
 sidebar{
- background-color: grey;
+ grid-column: 1/2;
+ background-color: white;
+ padding: 30px;
+ border: 10px solid #f8fafc;
+
+}
+
+main{
+ grid-column: 2/3;
+ padding: 30px;
+ background-color: #f8fafc;
+ 
 
 }
 
@@ -34,25 +46,33 @@ sidebar{
 }*/
 
 .project-container{
+ margin: 20px;
  display: flex;
  flex-direction: column;
+ justify-content: space-between;
+ min-height: 100px;
 }
 
 .task-container{
  display: flex;
  flex-direction: column;
  justify-content: space-between;
+ gap: 20px;
+
 }
 
 
 .task-item{
  display: flex;
  gap: 20px;
+ border-bottom: 1px solid;
+ padding: 10px; 
  
 }
 
 .task-item > p {
  margin: 10px;
+ width: 20%;
  font-size: large;
 }
 
