@@ -19,12 +19,13 @@ function openModal (event, id, pid){
  } else if (event.target.id == "edit" ){
   let Form = document.querySelector("#new-task");
   Form.classList.remove("hidden");
-  document.querySelector("#title").value = myProjects[pid].tasks[id].title;
-  document.querySelector("#due-date").value = myProjects[pid].tasks[id].dueDate;
-  document.querySelector("#priority").value = myProjects[pid].tasks[id].priority;
-  document.querySelector("#notes").value = myProjects[pid].tasks[id].notes;
-  document.querySelector("#project").value = myProjects[pid].tasks[id].project;
-  document.querySelector("#status").value = myProjects[pid].tasks[id].status;
+
+ document.querySelector("#title").value = myProjects[pid].tasks[id].title;
+ document.querySelector("#due-date").value = myProjects[pid].tasks[id].dueDate;
+ document.querySelector("#priority").value = myProjects[pid].tasks[id].priority;
+ document.querySelector("#notes").value = myProjects[pid].tasks[id].notes;
+ document.querySelector("#status").value = myProjects[pid].tasks[id].status;
+ document.querySelector("#project").selectedIndex = myProjects[pid].tasks[id].project;
 
 
  } else {
@@ -45,7 +46,6 @@ function closeModal(event){
 
 
 }
-
 
 
 class Tasks{
@@ -87,6 +87,10 @@ function editTask (event){
 }
 
 function taskSubmit (event){
+ console.log(event);
+
+ deleteTask(event);
+
  event.preventDefault();
 
 
@@ -104,7 +108,6 @@ let newTask = new Tasks(currentTaskId,taskTitle,taskDueDate,taskPriority,taskNot
 currentTaskId++;
 
 myProjects[taskProject].tasks.push(newTask);
-
 
 renderTasks(taskProject);
 closeModal();

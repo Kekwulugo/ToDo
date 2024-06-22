@@ -9,6 +9,7 @@ span{
 .wrapper{
  display: grid;
  grid-template-columns: repeat(1, 0.5fr) repeat(1, 2fr);
+ min-height: 800px;
  
 }
 
