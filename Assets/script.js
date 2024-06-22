@@ -7,7 +7,7 @@ let myProjects = [{
 let currentId = 0;
 let currentTaskId = 1;
 
-function openModal (event, tempTask){
+function openModal (event){
 
  let overlay = document.querySelector(".overlay");
  overlay.classList.remove("hidden"); 
@@ -62,17 +62,8 @@ function deleteTask (event){
 
 }
 
-function editTask (formMode,taskTitle,dueDate,priority, status, notes, project){
-
- const tempTask = {
-  taskTitle,
-  dueDate,
-  priority,
-  status,
-  notes,
-  project
- }
- openModal(formMode, tempTask);
+function editTask (){
+ openModal();
 
 }
 
@@ -133,9 +124,7 @@ function renderTasks(projectNumber){
  editBtn.dataset.projectId = myProjects[projectNumber].tasks[i].project;
  editBtn.dataset.taskId = myProjects[projectNumber].tasks[i].id;
  editBtn.innerText = "View/Edit";
- editBtn.addEventListener('click', function(){
-  editTask(edit,title,dueDate,priority, status, notes, projectNumber)
-  });
+editBtn.addEventListener('click', openModal);
 
  const deleteBtn = document.createElement("button");
  deleteBtn.setAttribute('id',"delete");
