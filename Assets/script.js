@@ -7,14 +7,26 @@ let myProjects = [{
 let currentId = 0;
 let currentTaskId = 1;
 
-function openModal (event){
+function openModal (event, id, pid){
 
  let overlay = document.querySelector(".overlay");
  overlay.classList.remove("hidden"); 
 
- if(event.target.id == "task" || event.target.id == "edit" ){
+ if(event.target.id == "task"){
   let Form = document.querySelector("#new-task");
   Form.classList.remove("hidden");
+
+ } else if (event.target.id == "edit" ){
+  let Form = document.querySelector("#new-task");
+  Form.classList.remove("hidden");
+  document.querySelector("#title").value = myProjects[pid].tasks[id].title;
+  document.querySelector("#due-date").value = myProjects[pid].tasks[id].dueDate;
+  document.querySelector("#priority").value = myProjects[pid].tasks[id].priority;
+  document.querySelector("#notes").value = myProjects[pid].tasks[id].notes;
+  document.querySelector("#project").value = myProjects[pid].tasks[id].project;
+  document.querySelector("#status").value = myProjects[pid].tasks[id].status;
+
+
  } else {
   let Form = document.querySelector("#new-project");
   Form.classList.remove("hidden");
@@ -33,6 +45,8 @@ function closeModal(event){
 
 
 }
+
+
 
 class Tasks{
  constructor(id,title,dueDate, priority,notes, project, status){
@@ -62,8 +76,13 @@ function deleteTask (event){
 
 }
 
-function editTask (){
- openModal();
+function editTask (event){
+ console.log(event.target.id);
+
+ let id = event.target.dataset.taskId;
+ let pid = event.target.dataset.projectId;
+ 
+ openModal(event, id, pid);
 
 }
 
@@ -124,7 +143,7 @@ function renderTasks(projectNumber){
  editBtn.dataset.projectId = myProjects[projectNumber].tasks[i].project;
  editBtn.dataset.taskId = myProjects[projectNumber].tasks[i].id;
  editBtn.innerText = "View/Edit";
-editBtn.addEventListener('click', openModal);
+editBtn.addEventListener('click', editTask);
 
  const deleteBtn = document.createElement("button");
  deleteBtn.setAttribute('id',"delete");
