@@ -7,7 +7,7 @@ let myProjects = [{
 let currentId = 0;
 let currentTaskId = 1;
 
-function openModal (event){
+function openModal (event, tempTask){
 
  let overlay = document.querySelector(".overlay");
  overlay.classList.remove("hidden"); 
@@ -62,8 +62,17 @@ function deleteTask (event){
 
 }
 
-function editTask (event){
- openModal(event);
+function editTask (formMode,taskTitle,dueDate,priority, status, notes, project){
+
+ const tempTask = {
+  taskTitle,
+  dueDate,
+  priority,
+  status,
+  notes,
+  project
+ }
+ openModal(formMode, tempTask);
 
 }
 
@@ -116,13 +125,17 @@ function renderTasks(projectNumber){
  const status =document.createElement("p");
  status.innerText = myProjects[projectNumber].tasks[i].status;
 
+ const notes = myProjects[projectNumber].tasks[i].notes;
+
 
  const editBtn = document.createElement("button");
  editBtn.setAttribute('id',"edit");
  editBtn.dataset.projectId = myProjects[projectNumber].tasks[i].project;
  editBtn.dataset.taskId = myProjects[projectNumber].tasks[i].id;
  editBtn.innerText = "View/Edit";
- editBtn.addEventListener('click',editTask)
+ editBtn.addEventListener('click', function(){
+  editTask(edit,title,dueDate,priority, status, notes, projectNumber)
+  });
 
  const deleteBtn = document.createElement("button");
  deleteBtn.setAttribute('id',"delete");
