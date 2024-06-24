@@ -21,12 +21,15 @@ function openModal (event, id, pid){
   Form.classList.remove("hidden");
   Form.classList.add("edit");
 
- document.querySelector("#title").value = myProjects[pid].tasks[id].title;
- document.querySelector("#due-date").value = myProjects[pid].tasks[id].dueDate;
- document.querySelector("#priority").value = myProjects[pid].tasks[id].priority;
- document.querySelector("#notes").value = myProjects[pid].tasks[id].notes;
- document.querySelector("#status").value = myProjects[pid].tasks[id].status;
- document.querySelector("#project").selectedIndex = myProjects[pid].tasks[id].project;
+
+document.querySelector("#title").value = myProjects.find(obj => obj.id == pid).tasks.find(obj => obj.id == id).title;
+
+ document.querySelector("#due-date").value = myProjects.find(obj => obj.id == pid).tasks.find(obj => obj.id == id).dueDate;
+
+ document.querySelector("#priority").value = myProjects.find(obj => obj.id == pid).tasks.find(obj => obj.id == id).priority;
+ document.querySelector("#notes").value = myProjects.find(obj => obj.id == pid).tasks.find(obj => obj.id == id).notes;
+ document.querySelector("#status").value = myProjects.find(obj => obj.id == pid).tasks.find(obj => obj.id == id).status;
+ document.querySelector("#project").selectedIndex = myProjects.find(obj => obj.id == pid).tasks.find(obj => obj.id == id).project;
  
  Form.dataset.projectId = pid;
  Form.dataset.taskId = id;
@@ -47,7 +50,6 @@ function closeModal(event){
  let projectForm = document.querySelector("#new-project");
  taskForm.classList.add("hidden");
  projectForm.classList.add("hidden");
-
 
 }
 
@@ -75,18 +77,17 @@ class Projects{
 
 function deleteTask (event){
  
- myProjects[event.target.dataset.projectId].tasks.pop([event.target.dataset.taskId]);
+ myProjects.find(obj => obj.id == event.target.dataset.projectId).tasks.pop(find(obj => obj.id == event.target.dataset.projectId));
  renderTasks(event.target.dataset.projectId);
 
 }
 
 function editTask (event){
- console.log(event.target.id);
 
  let id = event.target.dataset.taskId;
  let pid = event.target.dataset.projectId;
  
- openModal(event, id, pid);
+ openModal(event,id,pid);
 
 }
 
@@ -108,12 +109,13 @@ function taskSubmit (event){
  if(form.classList.contains("edit")){
   console.log("edit task");
 
-  myProjects[form.dataset.projectId].tasks[form.dataset.taskId].title = taskTitle;
-  myProjects[form.dataset.projectId].tasks[form.dataset.taskId].dueDate = taskDueDate;
-  myProjects[form.dataset.projectId].tasks[form.dataset.taskId].priority = taskPriority;
-  myProjects[form.dataset.projectId].tasks[form.dataset.taskId].status = taskStatus;
-  myProjects[form.dataset.projectId].tasks[form.dataset.taskId].notes = taskNotes;
-  myProjects[form.dataset.projectId].tasks[form.dataset.taskId].project = taskProject;
+  myProjects.find(obj => obj.id == form.dataset.projectId).tasks.find(obj => obj.id == form.dataset.taskId).title = taskTitle;
+  myProjects.find(obj => obj.id == form.dataset.projectId).tasks.find(obj => obj.id == form.dataset.taskId).dueDate = taskDueDate;
+
+  myProjects.find(obj => obj.id == form.dataset.projectId).tasks.find(obj => obj.id == form.dataset.taskId).priority = taskPriority;
+  myProjects.find(obj => obj.id == form.dataset.projectId).tasks.find(obj => obj.id == form.dataset.taskId).status = taskStatus;
+  myProjects.find(obj => obj.id == form.dataset.projectId).tasks.find(obj => obj.id == form.dataset.taskId).notes = taskNotes;
+  myProjects.find(obj => obj.id == form.dataset.projectId).tasks.find(obj => obj.id == form.dataset.taskId).project = taskProject;
 
   form.classList.remove("edit");
  
@@ -123,13 +125,11 @@ let newTask = new Tasks(currentTaskId,taskTitle,taskDueDate,taskPriority,taskNot
 currentTaskId++;
 
 myProjects[taskProject].tasks.push(newTask);
-
-
-
 }
 
 renderTasks(taskProject);
 closeModal();
+
 
 };
 
@@ -139,7 +139,6 @@ function renderTasks(projectNumber){
 
  taskContainer.innerHTML = "";
 
- 
   for (let i = 0; i <myProjects[projectNumber].tasks.length; i++){
  
   const taskItem = document.createElement("div");
@@ -151,7 +150,6 @@ function renderTasks(projectNumber){
  const dueDate = document.createElement("p");
  dueDate.innerText = myProjects[projectNumber].tasks[i].dueDate;
 
-
  const priority =document.createElement("p");
  priority.innerText = myProjects[projectNumber].tasks[i].priority;
 
@@ -159,7 +157,6 @@ function renderTasks(projectNumber){
  status.innerText = myProjects[projectNumber].tasks[i].status;
 
  const notes = myProjects[projectNumber].tasks[i].notes;
-
 
  const editBtn = document.createElement("button");
  editBtn.setAttribute('id',"edit");
@@ -175,7 +172,6 @@ editBtn.addEventListener('click', editTask);
  deleteBtn.innerText = "Delete";
  deleteBtn.addEventListener('click', deleteTask);
 
-
  taskItem.append(title);
  taskItem.append(dueDate);
  taskItem.append(priority);
@@ -183,9 +179,7 @@ editBtn.addEventListener('click', editTask);
  taskItem.append(editBtn);
  taskItem.append(deleteBtn);
 
-
  taskContainer.append(taskItem);
-
   
  }
 };
@@ -206,7 +200,6 @@ function renderProjects(){
   renderTasks(myProjects[i].id)
  });
 
- 
  projectContainer.append(projectItem);
 }
 }
@@ -257,7 +250,3 @@ renderProjects();
 renderTasks(0);
 
 })();
- 
-
-
-
