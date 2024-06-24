@@ -26,7 +26,9 @@ sidebar{
  grid-column: 1/2;
  background-color: white;
  padding: 30px;
- border: 10px solid #f8fafc;
+ display: flex;
+ flex-direction: column;
+ gap: 20px;
 
 }
 
@@ -34,6 +36,10 @@ main{
  grid-column: 2/3;
  padding: 30px;
  background-color: #f8fafc;
+
+ display: flex;
+ flex-direction: column;
+ gap: 20px;
  
 
 }
@@ -47,11 +53,10 @@ main{
 }*/
 
 .project-container{
- margin: 20px;
  display: flex;
  flex-direction: column;
- justify-content: space-between;
  min-height: 100px;
+ gap: 5px;
 }
 
 .task-container{
@@ -62,20 +67,19 @@ main{
 
 }
 
-
-.task-item{
+.task-item {
  display: flex;
+ justify-content: space-between;
  gap: 20px;
- border-bottom: 1px solid;
- padding: 10px; 
+ border-bottom: 1px solid; 
  
 }
 
 .task-item > p {
- margin: 10px;
- width: 20%;
+ min-width: 15%;
  font-size: large;
 }
+
 
 #edit{
  background-color: green;
@@ -111,6 +115,10 @@ input, select, textarea{
  padding: 0.5rem 0.7rem;
  background: #eee;
  border-radius: 50%;
+}
+
+.btn-open{
+ max-width: fit-content;
 }
 
 .overlay {
