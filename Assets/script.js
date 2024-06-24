@@ -19,6 +19,7 @@ function openModal (event, id, pid){
  } else if (event.target.id == "edit" ){
   let Form = document.querySelector("#new-task");
   Form.classList.remove("hidden");
+  Form.classList.add("edit");
 
  document.querySelector("#title").value = myProjects[pid].tasks[id].title;
  document.querySelector("#due-date").value = myProjects[pid].tasks[id].dueDate;
@@ -26,6 +27,9 @@ function openModal (event, id, pid){
  document.querySelector("#notes").value = myProjects[pid].tasks[id].notes;
  document.querySelector("#status").value = myProjects[pid].tasks[id].status;
  document.querySelector("#project").selectedIndex = myProjects[pid].tasks[id].project;
+ 
+ Form.dataset.projectId = pid;
+ Form.dataset.taskId = id;
 
 
  } else {
@@ -88,11 +92,7 @@ function editTask (event){
 
 function taskSubmit (event){
  console.log(event);
-
- deleteTask(event);
-
  event.preventDefault();
-
 
  //get input details
  let taskTitle = document.querySelector("#title").value;
@@ -102,15 +102,35 @@ function taskSubmit (event){
  let taskProject = document.querySelector("#project").selectedIndex;
  let taskStatus = document.querySelector("#status").value;
 
+ // check form mode
+ let form = document.querySelector("#new-task");
+ 
+ if(form.classList.contains("edit")){
+  console.log("edit task");
 
+  myProjects[form.dataset.projectId].tasks[form.dataset.taskId].title = taskTitle;
+  myProjects[form.dataset.projectId].tasks[form.dataset.taskId].dueDate = taskDueDate;
+  myProjects[form.dataset.projectId].tasks[form.dataset.taskId].priority = taskPriority;
+  myProjects[form.dataset.projectId].tasks[form.dataset.taskId].status = taskStatus;
+  myProjects[form.dataset.projectId].tasks[form.dataset.taskId].notes = taskNotes;
+  myProjects[form.dataset.projectId].tasks[form.dataset.taskId].project = taskProject;
+
+  form.classList.remove("edit");
+ 
+ } else{
 let newTask = new Tasks(currentTaskId,taskTitle,taskDueDate,taskPriority,taskNotes,taskProject, taskStatus);
 
 currentTaskId++;
 
 myProjects[taskProject].tasks.push(newTask);
 
+
+
+}
+
 renderTasks(taskProject);
 closeModal();
+
 };
 
 function renderTasks(projectNumber){
